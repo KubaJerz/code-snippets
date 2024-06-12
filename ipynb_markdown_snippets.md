@@ -14,6 +14,7 @@ hr {
 
 which makes a nice thick line and the pink down not mix with other colors in my IDE
 
+Which makes the following nice thick line and the pink down not mix with other colors in my IDE, THIS WORKS IN VSCODE (not all markdown support, most don't github, etc.)
 
 ---
 
