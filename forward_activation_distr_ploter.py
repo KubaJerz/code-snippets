@@ -1,71 +1,62 @@
-"""
-This script defines a function to plot the distribution of tensor data from a neural network's forward pass.
-The `forward` method of the neural network returns intermediate results, and the `plot_dist` function
-visualizes these results.
-
-Example forward pass:
-
-def forward(self, X):
-    res = []
-    x = self.l0(X)
-    res.append(x)
-    x = self.tanh0(x)
-    res.append(x)
-    x = self.l1(x)
-    res.append(x)
-    x = self.tanh1(x)
-    res.append(x)
-    logits = self.l2(x)
-    res.append(logits)
-    x = self.out(logits)
-    res.append(x)
-    return x, res
-
-The `forward` method returns the final output `x` and a list `res` containing intermediate tensors from each layer.
-
-Usage of plot_dist:
-
-- To plot the distribution of a specific layer's output:
-    plot_dist(res[layer_idx], dist_plot)
-
-- Parameters:
-    - data: A tensor from the list of intermediate results (`res`).
-    - dist_plot: 
-        - If 0, plots the distribution for each column in the tensor individually.
-        - Otherwise, plots the distribution of the entire flattened tensor.
-"""
-
 import matplotlib.pyplot as plt
 import seaborn as sns
+import torch
+import numpy as np
 
-def plot_dist(data, dist_plot):
+def plot_dist(data, dist_plot=1, num_cols=None, figsize=(10, 6), save_path=None):
     """
-    Plots the distribution of tensor data.
+    Plots the distribution of tensor data from a neural network's forward pass.
 
     Parameters:
-    - data (torch.Tensor): The tensor data to plot.
+    - data (torch.Tensor or numpy.ndarray): The tensor data to plot.
     - dist_plot (int): 
         - If 0, plots the distribution for each column in the tensor individually.
-        - Otherwise, plots the distribution of the entire flattened tensor.
+        - If 1 (default), plots the distribution of the entire flattened tensor.
+    - num_cols (int, optional): Number of columns to plot if dist_plot=0. If None, plots all columns.
+    - figsize (tuple, optinal): Figure size for the plot(s).
+    - save_path (str, optional): Path to save the plot. If None, just displays the plot
 
     Returns:
     None
     """
-    data_np = data.detach().numpy()
+    # Convert to numpy array if it's a torch tensor
+    if isinstance(data, torch.Tensor):
+        data_np = data.detach().cpu().numpy()
+    elif isinstance(data, np.ndarray):
+        data_np = data
+    else:
+        raise ValueError("Input data must be either a torch.Tensor or a numpy.ndarray")
 
     if dist_plot == 0:
-        num_cols = data_np.shape[1]  # Number of columns in the tensor
+        total_cols = data_np.shape[1]
+        num_cols = num_cols or total_cols
+        num_cols = min(num_cols, total_cols)  # make sure that  we dont exceed the actual number of columns
 
-        # Plot the distribution for each column individually
         for i in range(num_cols):
+            plt.figure(figsize=figsize)
             sns.histplot(data_np[:, i], kde=True, stat='density')
             plt.xlabel('Value')
-            plt.ylabel('Frequency')
+            plt.ylabel('Density')
             plt.title(f'Distribution of Column {i+1}')
-            plt.show()
+            if save_path:
+                plt.savefig(f'{save_path}_column_{i+1}.png')
+                plt.close()
+            else:
+                plt.show()
     else:
-        plt.hist(data_np.flatten(), bins=30)
+        plt.figure(figsize=figsize)
+        sns.histplot(data_np.flatten(), kde=True, stat='density', bins=30)
         plt.xlabel('Value')
-        plt.ylabel('Frequency')
-        plt.title('Distribution of the Tensor')
-        plt.show()
+        plt.ylabel('Density')
+        plt.title('Distribution of the Entire Tensor')
+        if save_path:
+            plt.savefig(f'{save_path}_entire_tensor.png')
+            plt.close()
+        else:
+            plt.show()
+
+# Example:
+# model = YourNeuralNetwork()
+# input_data = torch.randn(100, 10)
+# output, intermediate_results = model(input_data)
+# plot_dist(intermediate_results[2], dist_plot=0, num_cols=5, save_path='layer_3_dist')
