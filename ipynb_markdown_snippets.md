@@ -12,7 +12,7 @@ hr {
 
 ```
 
-which makes a nice thick line and the pink down not mix with other colors in my IDE
+**which makes a nice thick line** and the pink does not mix with other colors in my IDE
 
 Which makes the following nice thick line and the pink down not mix with other colors in my IDE, THIS WORKS IN VSCODE (not all markdown support, most don't github, etc.)
 
@@ -26,10 +26,18 @@ Which makes the following nice thick line and the pink down not mix with other c
 
 ````
 
-Then both useed to make text smaller. Can be used for links to data sources etc. 
+Then both **used to make text smaller.** Can be used for links to data sources etc. 
 
-Note the fiirst one works both Colab and VSCode. The seccodn one olny works in VSCode.
+Note the first one works both Colab and VSCode. The second one olny works in VSCode.
 
 ---
+
+```
+<span style="color:pink;"> SOME TEXT </span>
+
+```
+
+This code makes the text color in vscode md
+
 
 
