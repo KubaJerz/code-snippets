@@ -34,10 +34,9 @@ Note the first one works both Colab and VSCode. The second one olny works in VSC
 
 ```
 <span style="color:pink;"> SOME TEXT </span>
-
 ```
 
-This code makes the text color in vscode md
+This code **makes colorfull text** in vscode md
 
 
 
