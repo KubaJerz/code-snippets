@@ -7,3 +7,13 @@ Ctrl + PageDown
 ```
 
 ---
+
+To open new terminal tab (same window)
+```
+Ctrl + Shift + t
+```
+
+To open bew terminal window
+``` Ctrl + Alt + t ```
+
+--- 
