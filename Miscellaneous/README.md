@@ -1,7 +1,7 @@
 # CodeSnippets
 Documentation of many Miscellaneous snippets of code that I use
 
-#### plot_3d_surface_plotly
+## plot_3d_surface_plotly
 
 Creates an interactive 3D surface plot using Plotly.
 
@@ -113,11 +113,33 @@ pio.show(fig)
 
 This example creates a 3D surface plot of the function f(x, y) = sin(sqrt(x^2 + y^2)) with two trajectories: a solid red line and a dashed green line. The surface uses a blue-white-red colorscale and is slightly transparent. Axis labels and grid lines are visible.
 
-## Notes:
+### Notes:
 
 - If `show_in_browser` is set to True in `plot_3d_surface_plotly`, the function will open the plot in the default web browser and return None instead of the figure object.
 - The `trajectories` parameter in `plot_3d_surface_plotly` allows for multiple paths to be drawn on the surface, each with customizable properties.
 - Adjust the `resolution` parameter to balance between plot detail and performance. Higher values provide smoother surfaces but may slow down rendering.
-```
+
 
 ---
+
+
+## File Renaming Function     ```namechange.ipynb```
+This function renames files in a directory based on a specific pattern.
+
+
+This script does the following:
+
+- Defines a function generate_new_name that creates a new filename based on the old name and an index.
+- Initializes variables for mapping, directory, and counters.
+- Iterates through sorted filenames in the directory:
+
+For each .pt file:
+- Increments j every other file (to group PF and Vehicle files).
+- Generates a new name using generate_new_name.
+- Adds the mapping to the mapping list.
+- Renames the file.
+
+
+Writes the mapping to a text file named "file_name_mapping.txt".
+
+The new names will be in the format "000_0.pt", "000_1.pt", "001_0.pt", "001_1.pt", etc., where the first part is a zero-padded index and the second part indicates PF (0) or Vehicle (1).
