@@ -12,7 +12,7 @@ I specify which one it works in: gnome terminal (basic ubuntu terminal) and Term
 | <br> <br> | |
 | Lists files sorted by latest modification time <br> ```ls -lt``` <br> <br> ```ls -ltr``` *in reverse order* | *Gnome Terminal <br> and <br> Terminal.app* |
 | <br> <br> | |
-| first line saves the reqs then next line installs from the saves `.txt` file <br> ```env1/bin/python -m pip freeze > requirements.txt ```<br> <br> ```env2/bin/python -m pip install -r requirements.txt``` |  *Gnome Terminal <br> and <br> Terminal.app* |
+| Saves the reqs to a `.txt` file <br> ```pip freeze > requirements.txt ```<br> Installs from the save <br> ```pip install -r requirements.txt``` |  *Gnome Terminal <br> and <br> Terminal.app* |
 | <br> <br> | |
 
 
