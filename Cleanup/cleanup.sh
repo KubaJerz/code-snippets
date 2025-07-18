@@ -10,6 +10,7 @@ PRESERVED_FILES=(
     "best_dev_metrics.json"
     "metrics.png"
     "run_param.toml"
+    "run_params.toml"
 )
 
 # =============================================================================
